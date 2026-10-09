@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>আয়না ঘরে হেফজখানা</title>
-<meta name="theme-color" content="#8C5F22">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -12,102 +11,62 @@
     --paper:#FDFBF7;
     --paper-card:#F4ECE1;
     --ink:#2C2218;
-    --ink-soft:#665A4C;
     --accent:#C68B38;
     --accent-deep:#8C5F22;
     --line:#E2D6C3;
-    --dark-bg:#12100E;
-    --dark-card:#1C1814;
-    --dark-surface:#26211C;
-    --dark-ink:#EAE2D5;
-    --dark-ink-soft:#A09585;
-    --dark-line:#383026;
   }
-  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
-  html,body{height:100%; margin:0;}
+  *{box-sizing:border-box;}
   body{
+    margin:0;
     font-family:'Hind Siliguri','Noto Serif Bengali',sans-serif;
     background:var(--paper);
     color:var(--ink);
-    overflow:hidden;
   }
-  body.dark{background:var(--dark-bg); color:var(--dark-ink);}
-
-  #app{position:relative; height:100vh; width:100vw; overflow:hidden;}
 
   /* TOP BAR */
   .topbar{
-    position:fixed; top:0; left:0; right:0; z-index:20;
+    position:sticky; top:0; z-index:20;
     display:flex; align-items:center; gap:12px;
     padding:12px 16px;
-    background:rgba(253, 251, 247, 0.95);
-    backdrop-filter: blur(10px);
+    background:var(--paper);
     border-bottom:1px solid var(--line);
   }
-  body.dark .topbar{
-    background:rgba(28, 24, 20, 0.95);
-    border-color:var(--dark-line);
-  }
   .icon-btn{
-    width:42px; height:42px; flex-shrink:0;
+    width:40px; height:40px;
     display:flex; align-items:center; justify-content:center;
-    border-radius:12px; border:1px solid var(--line);
+    border-radius:10px; border:1px solid var(--line);
     background:var(--paper-card); color:var(--ink); cursor:pointer;
+    font-size:18px; font-weight:bold;
   }
-  body.dark .icon-btn{border-color:var(--dark-line); background:var(--dark-surface); color:var(--dark-ink);}
-  .icon-btn svg{width:22px; height:22px; display:block;}
-  
   .topbar-title{
     font-family:'Noto Serif Bengali',serif; font-weight:700; font-size:17px;
-    flex:1; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-    color:var(--accent-deep);
+    flex:1; text-align:center; color:var(--accent-deep);
   }
-  body.dark .topbar-title{color:var(--accent);}
 
-  /* SCREENS */
-  .screen{
-    position:absolute; inset:0;
-    padding-top:64px;
-    overflow-y:auto; -webkit-overflow-scrolling:touch;
-    display:none;
-    background:var(--paper);
-  }
-  body.dark .screen{background:var(--dark-bg);}
-  .screen.active{display:block;}
+  /* VIEWS */
+  .view{display:none; padding:20px 16px 120px 16px; max-width:680px; margin:0 auto;}
+  .view.active{display:block;}
 
-  /* HOME / COVER */
-  #screen-home{padding-top:0;}
+  /* COVER */
   .cover-wrap{
-    min-height:100vh; display:flex; flex-direction:column;
-    align-items:center; justify-content:center; text-align:center;
-    padding:30px 20px; gap:20px;
+    min-height:80vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; gap:20px;
   }
   .book-card{
-    background:var(--paper-card);
-    border:1px solid var(--line);
-    border-radius:24px;
-    padding:32px 20px;
-    width:100%; max-width:340px;
+    background:var(--paper-card); border:1px solid var(--line);
+    border-radius:24px; padding:32px 20px; width:100%; max-width:340px;
     display:flex; flex-direction:column; align-items:center; gap:14px;
   }
-  body.dark .book-card{background:var(--dark-card); border-color:var(--dark-line);}
-  
   .cover-mark{
     width:64px; height:64px; border-radius:18px;
     background:linear-gradient(135deg,var(--accent),var(--accent-deep));
     display:flex; align-items:center; justify-content:center;
     color:#FFF; font-family:'Noto Serif Bengali',serif; font-size:30px; font-weight:700;
   }
-  .cover-title{
-    font-family:'Noto Serif Bengali',serif; font-weight:700; font-size:26px; line-height:1.3;
-  }
-  .cover-author{
-    color:var(--accent-deep); font-size:14px; font-weight:600;
-    background:rgba(198, 139, 56, 0.15); padding:6px 14px; border-radius:20px;
-  }
-  body.dark .cover-author{color:var(--accent); background:rgba(198, 139, 56, 0.25);}
+  .cover-title{font-family:'Noto Serif Bengali',serif; font-weight:700; font-size:26px;}
+  .cover-author{color:var(--accent-deep); font-size:14px; font-weight:600; background:rgba(198, 139, 56, 0.15); padding:6px 14px; border-radius:20px;}
 
-  .cover-actions{display:flex; flex-direction:column; gap:10px; width:100%; max-width:320px;}
+  .cover-actions{display:flex; flex-direction:column; gap:12px; width:100%; max-width:320px;}
   .btn-primary{
     padding:15px; border-radius:14px; border:none; cursor:pointer;
     background:linear-gradient(135deg, var(--accent), var(--accent-deep));
@@ -118,187 +77,170 @@
     background:var(--paper-card); border:1px solid var(--line); color:var(--ink);
     font-weight:600; font-size:15px; font-family:inherit;
   }
-  body.dark .btn-secondary{background:var(--dark-card); border-color:var(--dark-line); color:var(--dark-ink);}
 
   /* TOC */
-  .toc-list{padding:12px 16px 40px;}
   .toc-item{
     display:flex; align-items:center; gap:14px;
     padding:14px; margin-bottom:10px;
     background:var(--paper-card); border:1px solid var(--line);
     border-radius:16px; cursor:pointer;
   }
-  body.dark .toc-item{background:var(--dark-card); border-color:var(--dark-line);}
-  
   .toc-num{
-    width:36px; height:36px; border-radius:10px; flex-shrink:0;
-    background:rgba(198, 139, 56, 0.15); color:var(--accent-deep);
-    display:flex; align-items:center; justify-content:center;
-    font-weight:700; font-size:15px;
+    width:36px; height:36px; border-radius:10px;
+    background:rgba(198, 139, 56, 0.2); color:var(--accent-deep);
+    display:flex; align-items:center; justify-content:center; font-weight:700;
   }
-  body.dark .toc-num{color:var(--accent); background:rgba(198, 139, 56, 0.25);}
-  .toc-text{flex:1; min-width:0;}
-  .toc-item-title{font-size:15.5px; font-weight:600; font-family:'Noto Serif Bengali',serif;}
-  .toc-item-sub{font-size:12px; color:var(--ink-soft); margin-top:2px;}
-  body.dark .toc-item-sub{color:var(--dark-ink-soft);}
+  .toc-title{font-size:16px; font-weight:600; font-family:'Noto Serif Bengali',serif;}
 
-  /* SEARCH */
-  .search-bar-wrap{padding:16px 16px 8px;}
-  .search-input{
-    width:100%; padding:14px 16px; border-radius:14px;
-    border:1px solid var(--line); background:var(--paper-card); color:var(--ink);
-    font-size:15px; font-family:inherit;
-  }
-  body.dark .search-input{background:var(--dark-card); border-color:var(--dark-line); color:var(--dark-ink);}
-  .search-hint{padding:20px; color:var(--ink-soft); font-size:14px; text-align:center;}
-  body.dark .search-hint{color:var(--dark-ink-soft);}
-  .search-results{padding:8px 16px 40px;}
-  .result-item{
-    padding:14px; margin-bottom:10px; background:var(--paper-card);
-    border:1px solid var(--line); border-radius:14px; cursor:pointer;
-  }
-  body.dark .result-item{background:var(--dark-card); border-color:var(--dark-line);}
-  .result-chap{font-size:12px; color:var(--accent-deep); font-weight:700; margin-bottom:6px;}
-  body.dark .result-chap{color:var(--accent);}
-  .result-snippet{font-size:14px; line-height:1.6;}
-  mark{background:var(--accent); color:#FFF; border-radius:4px; padding:0 4px;}
+  /* READER */
+  .chapter-label{font-size:13px; color:var(--accent-deep); font-weight:700; margin-bottom:6px;}
+  .chapter-title{font-family:'Noto Serif Bengali',serif; font-weight:700; font-size:24px; margin-bottom:20px; border-bottom:2px solid var(--line); padding-bottom:12px;}
+  .chapter-body p{font-family:'Noto Serif Bengali',serif; font-size:18px; line-height:2.0; margin-bottom:18px; text-align:justify;}
 
-  /* READER (IMPORTANT: Bottom Padding for buttons) */
-  #screen-reader .screen-inner{
-    padding:20px 20px 140px 20px;
-    max-width:680px; margin:0 auto;
-  }
-  .chapter-label{
-    font-size:13px; color:var(--accent-deep); font-weight:700; margin-bottom:6px;
-  }
-  body.dark .chapter-label{color:var(--accent);}
-  .chapter-title{
-    font-family:'Noto Serif Bengali',serif; font-weight:700; font-size:24px; margin:0 0 20px; line-height:1.4;
-    border-bottom: 2px solid var(--line); padding-bottom:14px;
-  }
-  body.dark .chapter-title{border-color:var(--dark-line);}
-  
-  .chapter-body p{
-    font-family:'Noto Serif Bengali',serif;
-    line-height:2.05; margin:0 0 20px; text-align:justify;
-  }
-  .chapter-body p strong{font-weight:700; color:var(--accent-deep);}
-  body.dark .chapter-body p strong{color:var(--accent);}
-
-  /* FLOATING BOTTOM NAV */
+  /* BOTTOM NAV */
   .reader-nav{
-    position:fixed; bottom:0; left:0; right:0; z-index:25;
+    position:fixed; bottom:0; left:0; right:0;
     display:flex; gap:12px; padding:12px 16px;
-    background:rgba(253, 251, 247, 0.95);
-    backdrop-filter: blur(10px);
-    border-top:1px solid var(--line);
-  }
-  body.dark .reader-nav{
-    background:rgba(28, 24, 20, 0.95);
-    border-color:var(--dark-line);
+    background:var(--paper); border-top:1px solid var(--line);
   }
   .nav-btn{
-    flex:1; min-height:46px; padding:10px 14px; border-radius:14px;
+    flex:1; padding:12px; border-radius:12px;
     border:1px solid var(--line); background:var(--paper-card); color:var(--ink);
-    font-family:inherit; font-size:14px; font-weight:600; cursor:pointer;
-    display:flex; align-items:center; justify-content:center; gap:8px;
+    font-size:15px; font-weight:600; cursor:pointer;
   }
-  body.dark .nav-btn{border-color:var(--dark-line); background:var(--dark-surface); color:var(--dark-ink);}
-  .nav-btn:disabled{opacity:.35; cursor:not-allowed;}
-  .nav-btn svg{width:18px; height:18px; flex-shrink:0;}
-
-  /* SETTINGS SHEET */
-  .sheet-overlay{
-    position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:30;
-    opacity:0; pointer-events:none; transition:opacity .3s;
-  }
-  .sheet-overlay.open{opacity:1; pointer-events:auto;}
-  .sheet{
-    position:fixed; left:0; right:0; bottom:0; z-index:31;
-    background:var(--paper); border-radius:24px 24px 0 0;
-    padding:24px; transform:translateY(100%); transition:transform .3s ease;
-  }
-  body.dark .sheet{background:var(--dark-card);}
-  .sheet.open{transform:translateY(0);}
-  .sheet-title{font-weight:700; font-size:16px; margin-bottom:20px; font-family:'Noto Serif Bengali',serif;}
-  .sheet-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
-  .fontsize-controls{display:flex; align-items:center; gap:16px;}
-  .fs-btn{
-    width:42px; height:42px; border-radius:12px; border:1px solid var(--line);
-    background:var(--paper-card); color:var(--ink); font-size:18px; font-weight:700; cursor:pointer;
-  }
-  body.dark .fs-btn{border-color:var(--dark-line); background:var(--dark-surface); color:var(--dark-ink);}
-  
-  .toggle{
-    width:50px; height:28px; border-radius:20px; background:var(--line);
-    position:relative; cursor:pointer; border:none;
-  }
-  body.dark .toggle{background:var(--dark-line);}
-  .toggle.on{background:var(--accent-deep);}
-  .toggle-knob{
-    position:absolute; top:3px; left:3px; width:22px; height:22px; border-radius:50%;
-    background:#fff; transition:left .2s;
-  }
-  .toggle.on .toggle-knob{left:25px;}
+  .nav-btn:disabled{opacity:.4;}
 </style>
 </head>
 <body>
-<div id="app">
 
-  <!-- TOP BAR -->
-  <div class="topbar" id="topbar" style="display:none;">
-    <button class="icon-btn" id="backBtn" aria-label="ফিরে যান">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-    <div class="topbar-title" id="topbarTitle">আয়না ঘরে হেফজখানা</div>
-    <button class="icon-btn" id="settingsBtn" aria-label="সেটিংস">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09A1.65 1.65 0 0015.4 4.6a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9c.14.36.44.63.8.8.36.13.65.4.8.76"/></svg>
-    </button>
-  </div>
-
-  <!-- HOME SCREEN -->
-  <div class="screen active" id="screen-home">
-    <div class="cover-wrap">
-      <div class="book-card">
-        <div class="cover-mark">আ</div>
-        <div class="cover-title">আয়না ঘরে হেফজখানা</div>
-        <div class="cover-author">হাফেজ মুহাম্মদ আব্দুল আহাদ</div>
-      </div>
-      <div class="cover-actions">
-        <button class="btn-primary" id="continueBtn">পড়া শুরু করুন</button>
-        <button class="btn-secondary" id="tocBtnHome">সূচিপত্র দেখুন</button>
-        <button class="btn-secondary" id="searchBtnHome">বইয়ের ভেতর খুঁজুন</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- TOC SCREEN -->
-  <div class="screen" id="screen-toc">
-    <div class="toc-list" id="tocList"></div>
-  </div>
-
-  <!-- SEARCH SCREEN -->
-  <div class="screen" id="screen-search">
-    <div class="search-bar-wrap">
-      <input type="text" class="search-input" id="searchInput" placeholder="বইয়ের ভেতর অনুসন্ধান করুন...">
-    </div>
-    <div id="searchArea">
-      <div class="search-hint">অন্তত ২ অক্ষর টাইপ করে খুঁজুন</div>
-    </div>
-  </div>
-
-  <!-- READER SCREEN -->
-  <div class="screen" id="screen-reader">
-    <div class="screen-inner">
-      <div class="chapter-label" id="chapterLabel">অধ্যায় ১</div>
-      <div class="chapter-title" id="chapterTitle"></div>
-      <div class="chapter-body" id="chapterBody"></div>
-    </div>
-  </div>
-
+<!-- TOP BAR -->
+<div class="topbar" id="topbar" style="display:none;">
+  <button class="icon-btn" id="backBtn">❮</button>
+  <div class="topbar-title" id="topbarTitle">আয়না ঘরে হেফজখানা</div>
 </div>
 
-<!-- BOTTOM NAV BUTTONS -->
+<!-- HOME VIEW -->
+<div class="view active" id="view-home">
+  <div class="cover-wrap">
+    <div class="book-card">
+      <div class="cover-mark">আ</div>
+      <div class="cover-title">আয়না ঘরে হেফজখানা</div>
+      <div class="cover-author">হাফেজ মুহাম্মদ আব্দুল আহাদ</div>
+    </div>
+    <div class="cover-actions">
+      <button class="btn-primary" onclick="openChapter(0)">পড়া শুরু করুন</button>
+      <button class="btn-secondary" onclick="showView('view-toc')">সূচিপত্র দেখুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOC VIEW -->
+<div class="view" id="view-toc">
+  <div id="tocList"></div>
+</div>
+
+<!-- READER VIEW -->
+<div class="view" id="view-reader">
+  <div class="chapter-label" id="chapterLabel"></div>
+  <div class="chapter-title" id="chapterTitle"></div>
+  <div class="chapter-body" id="chapterBody"></div>
+</div>
+
+<!-- BOTTOM NAV -->
 <div class="reader-nav" id="readerNav" style="display:none;">
-  <button class="nav-btn" id="prevChapterBtn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="
+  <button class="nav-btn" id="prevBtn" onclick="prevChapter()">আগের অধ্যায়</button>
+  <button class="nav-btn" id="nextBtn" onclick="nextChapter()">পরের অধ্যায়</button>
+</div>
+
+<script>
+const BOOK = {
+  title: "আয়না ঘরে হেফজখানা",
+  chapters: [
+    {
+      title: "শুরুর কথা",
+      paragraphs: [
+        "বিসমিল্লাহির রহমানির রহিম।",
+        "সকল প্রশংসা মহান আল্লাহ তাআলার, যিনি মানবজাতির হিদায়াতের জন্য সর্বশ্রেষ্ঠ নিয়ামত পরম পবিত্র আল-কোরআন নাজিল করেছেন।",
+        "‘হাফেজে কোরআন’ — এই দুটি শব্দ কেবল একটি জাগতিক সম্মান বা সাধারণ উপাধি নয়; এটি হলো আল্লাহর কালাম বুকে ধরে রাখার এক মহাজাগতিক আমানত।"
+      ]
+    },
+    {
+      title: "কোরআন সংকলনের সংক্ষিপ্ত ইতিহাস",
+      paragraphs: [
+        "কোরআন কোনো সাধারণ কিতাব নয়; এটি নিখিল বিশ্বের রাজাধিরাজ মহান আল্লাহ তাআলার চিরন্তন আসমানি বাণী।",
+        "ওহী নাজিল হওয়ার সাথে সাথেই রাসূলুল্লাহ (সা.) নিজে তা মুখস্থ করে নিতেন এবং সাহাবিদেরও মুখস্থ করাতেন।"
+      ]
+    },
+    {
+      title: "হাফেজে কুরআনের ফযিলত",
+      paragraphs: [
+        "ফরজ ইবাদতের পর সব আমলের মধ্যে সবচেয়ে গুরুত্বপূর্ণ, দামি ও আল্লাহ তায়ালার নিকট প্রিয় আমল হচ্ছে কুরআন তেলাওয়াত।",
+        "কিয়ামতের দিন ছাহেবে কুরআনকে বলা হবে: পড়ো এবং মর্যাদাসমূহের ঊর্ধ্বে উঠতে থাকো।"
+      ]
+    },
+    {
+      title: "আয়না ঘরে হেফজখানা",
+      paragraphs: [
+        "একজন হাফেজের কত দাম, কত মর্যাদা, কত ফজিলত! তাহলে এত মর্যাদা থাকা সত্ত্বেও আমরা কেন পড়তে চাই না?",
+        "শয়তান যেকোনো মূল্যে হলেও একজন তলবে এলেমকে দ্বীনের রাস্তা থেকে সরানোর চেষ্টা করবে।"
+      ]
+    }
+  ]
+};
+
+let currentChapter = 0;
+
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  
+  const isHome = (id === 'view-home');
+  const isReader = (id === 'view-reader');
+  
+  document.getElementById('topbar').style.display = isHome ? 'none' : 'flex';
+  document.getElementById('readerNav').style.display = isReader ? 'flex' : 'none';
+  document.getElementById('topbarTitle').textContent = isReader ? BOOK.title : 'সূচিপত্র';
+  window.scrollTo(0, 0);
+}
+
+document.getElementById('backBtn').onclick = () => showView('view-home');
+
+function renderTOC() {
+  const list = document.getElementById('tocList');
+  list.innerHTML = '';
+  BOOK.chapters.forEach((ch, i) => {
+    const div = document.createElement('div');
+    div.className = 'toc-item';
+    div.innerHTML = `<div class="toc-num">${i+1}</div><div class="toc-title">${ch.title}</div>`;
+    div.onclick = () => openChapter(i);
+    list.appendChild(div);
+  });
+}
+
+function openChapter(index) {
+  currentChapter = index;
+  const ch = BOOK.chapters[index];
+  document.getElementById('chapterLabel').textContent = `অধ্যায় ${index+1} / ${BOOK.chapters.length}`;
+  document.getElementById('chapterTitle').textContent = ch.title;
+  
+  const body = document.getElementById('chapterBody');
+  body.innerHTML = '';
+  ch.paragraphs.forEach(p => {
+    const el = document.createElement('p');
+    el.textContent = p;
+    body.appendChild(el);
+  });
+
+  document.getElementById('prevBtn').disabled = (index === 0);
+  document.getElementById('nextBtn').disabled = (index === BOOK.chapters.length - 1);
+
+  showView('view-reader');
+}
+
+function prevChapter() { if(currentChapter > 0) openChapter(currentChapter - 1); }
+function nextChapter() { if(currentChapter < BOOK.chapters.length - 1) openChapter(currentChapter + 1); }
+
+renderTOC();
+</script>
+</body>
+</html>
